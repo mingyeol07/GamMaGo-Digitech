@@ -8,15 +8,20 @@ public class Player : MonoBehaviour
 
     private int maxHp;
     private int curHp;
-    [SerializeField] private float speed;
+    private float[] speed = { 5, 5, 4, 3, 2 };
     [SerializeField] private float jumpSpeed;
+    [SerializeField] private Transform player;
 
     private Vector2 boxCheckOffset = new Vector2(0, -0.625f);
     private Vector2 boxCheckSize = new Vector2(0.6f, 0.1f);
 
     private int jumpCount = 2;
 
+    [SerializeField] private Animator sharpAnim;
+    [SerializeField] private Animator boldAnim;
     private Collider2D[] colliders;
+    [SerializeField] private Collider2D attackRange_Sharp;
+    [SerializeField] private Collider2D attackRange_bold;
 
     private void Awake()
     {
@@ -42,11 +47,11 @@ public class Player : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            transform.rotation = Quaternion.Euler(0, 0, 0);
+            player.rotation = Quaternion.Euler(0, 0, 0);
         }
         else if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            transform.rotation = Quaternion.Euler(0, 180, 0);
+            player.rotation = Quaternion.Euler(0, 180, 0);
         }
     }
 
@@ -54,7 +59,7 @@ public class Player : MonoBehaviour
     {
         float h = Input.GetAxisRaw("Horizontal");
 
-        rigid.velocity = new Vector2(h * speed, rigid.velocity.y);
+        rigid.velocity = new Vector2(h * speed[InventoryManager.Instance.level], rigid.velocity.y);
     }
 
     private void Jump()
@@ -75,6 +80,28 @@ public class Player : MonoBehaviour
         {
             jumpCount = 2;
         }
+    }
+
+    public void SharpSlash()
+    {
+        attackRange_Sharp.enabled = true;
+        sharpAnim.SetTrigger("Attack");
+        StartCoroutine(OffColl());
+    }
+
+    public void BoldSlash()
+    {
+        attackRange_bold.enabled = true;
+        boldAnim.SetTrigger("Attack");
+        StartCoroutine(OffColl());
+    }
+
+    private IEnumerator OffColl()
+    {
+        yield return new WaitForSeconds(1f);
+
+        attackRange_bold.enabled = false;
+        attackRange_Sharp.enabled = false;
     }
 
     private void OnDrawGizmos()
@@ -109,15 +136,7 @@ public class Player : MonoBehaviour
 
     private void HpDown()
     {
-        if (curHp > 0)
-        {
-            curHp--;
-        }
-
-        if (curHp < 0)
-        {
-            Destroy(gameObject);
-        }
+        InventoryManager.Instance.GetRandomItemSpawn();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
