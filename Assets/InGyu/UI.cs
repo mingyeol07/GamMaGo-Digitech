@@ -20,7 +20,7 @@ public class UI : MonoBehaviour
     
     void Update() {
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        /*if (Input.GetKeyDown(KeyCode.Space))
         {
             if(CurHp > 0)
             {
@@ -30,7 +30,7 @@ public class UI : MonoBehaviour
             {
                 CurHp = 0;
             }
-        }
+        }*/
 
         HandleHp();
     }
