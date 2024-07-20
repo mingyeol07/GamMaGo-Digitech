@@ -8,7 +8,6 @@ public class ItemIconManager : MonoBehaviour
     [SerializeField] private Transform[] itemsTransform;
     [SerializeField] private float itemMoveSpeed;
     [SerializeField] private GameObject iconPrefab;
-    [SerializeField] private RectTransform iconParent;
 
     [SerializeField] private Sprite[] typeSprite;
 
