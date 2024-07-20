@@ -125,4 +125,9 @@ public class Monster : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    public void ItemDrop()
+    {
+        InventoryManager.Instance.GetRandomItemSpawn();
+    }
 }

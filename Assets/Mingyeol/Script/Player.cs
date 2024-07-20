@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
 
     private int maxHp;
     private int curHp;
-    [SerializeField] private float speed;
+    private float[] speed = { 5, 5, 4, 3, 2 };
     [SerializeField] private float jumpSpeed;
     [SerializeField] private Transform player;
 
@@ -59,7 +59,7 @@ public class Player : MonoBehaviour
     {
         float h = Input.GetAxisRaw("Horizontal");
 
-        rigid.velocity = new Vector2(h * speed, rigid.velocity.y);
+        rigid.velocity = new Vector2(h * speed[InventoryManager.Instance.level], rigid.velocity.y);
     }
 
     private void Jump()
@@ -98,7 +98,7 @@ public class Player : MonoBehaviour
 
     private IEnumerator OffColl()
     {
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(1f);
 
         attackRange_bold.enabled = false;
         attackRange_Sharp.enabled = false;
@@ -136,16 +136,7 @@ public class Player : MonoBehaviour
 
     private void HpDown()
     {
-        if (curHp > 0)
-        {
-            
-            curHp--;
-        }
-
-        if (curHp < 0)
-        {
-            Destroy(gameObject);
-        }
+        InventoryManager.Instance.GetRandomItemSpawn();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

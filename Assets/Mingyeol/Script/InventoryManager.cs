@@ -13,7 +13,9 @@ public class InventoryManager : MonoBehaviour
 
     private ItemIconManager iconManager;
     private readonly int hash_level = Animator.StringToHash("Level");
-    private int level = 0;
+    public int level = 0;
+
+    [SerializeField] private GameObject pickUpItemPrefab;
 
     private void Awake()
     {
@@ -32,6 +34,11 @@ public class InventoryManager : MonoBehaviour
     private void Update()
     {
         SetBackPackAnimator();
+    }
+
+    public GameObject GetRandomItemSpawn()
+    {
+        return Instantiate(pickUpItemPrefab);
     }
 
     private void SetBackPackAnimator()
@@ -87,7 +94,7 @@ public class InventoryManager : MonoBehaviour
     {
         if (itemList.Count >= 10) // 최대 크기를 10으로 설정
         {
-            Debug.LogWarning("아이템을 더 이상 추가할 수 없습니다.");
+            GameManager.Instance.GameOver();
             return;
         }
 
