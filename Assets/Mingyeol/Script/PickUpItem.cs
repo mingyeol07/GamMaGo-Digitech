@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public enum ColorType
 {
-    White
+    Red, Green, Blue
 }
 
 public class PickUpItem : MonoBehaviour
@@ -17,22 +17,23 @@ public class PickUpItem : MonoBehaviour
     private ColorType type;
 
     private int randomTypeIndex;
-    private float speed;
+    private float speed = 1.0f; // 속도 변수 초기화
     private float startTime;
 
-    private Vector3[] poses = new Vector3[4];
+    private bool isPickUp;
+
     private Vector3 initialPosition;
 
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        startTime = Time.time;
-        initialPosition = transform.position;
     }
 
     private void Start()
     {
         playerTransform = GameManager.Instance.Player.transform;
+
+
 
         RandomType();
     }
@@ -49,12 +50,25 @@ public class PickUpItem : MonoBehaviour
 
     private void Update()
     {
-        if (playerTransform != null)
+        if (playerTransform != null && isPickUp)
         {
             float t = (Time.time - startTime) * speed;
-            t = t * t;
+            t = t * t; // 가속 효과
 
-            transform.position = Vector3.Lerp(initialPosition, playerTransform.position, t * Time.deltaTime);
+            if (t > 1.0f) t = 1.0f; // t 값을 1로 클램프
+
+            transform.position = Vector3.Lerp(initialPosition, playerTransform.position, t);
+        }
+    }
+
+    public void SetIsPickUp()
+    {
+        if(!isPickUp)
+        {
+            isPickUp = true;
+
+            startTime = Time.time;
+            initialPosition = transform.position;
         }
     }
 

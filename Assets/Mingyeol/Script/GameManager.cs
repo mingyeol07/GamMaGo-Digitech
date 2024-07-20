@@ -20,7 +20,6 @@ public class GameManager : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Space))
         {
             Instantiate(testPickUpitem, new Vector3(0,0,0), Quaternion.identity);
-            testPickUpitem.GetComponent<PickUpItem>().ItemPickUp();
         }
     }
 }

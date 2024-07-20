@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2421014652898949609}
   m_Layer: 5
   m_Name: ItemIcon
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -61,14 +61,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 2f2a2de251b092d4aacc80151b660222, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -90,8 +90,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa47f5dad9df43c4f81112242dbd92a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  img_icon: {fileID: 3307378368531819171}
-  img_colorIcon: {fileID: 7345687192498263153}
+  img_icon: {fileID: 7345687192498263153}
+  img_colorIcon: {fileID: 3307378368531819171}
 --- !u!1 &8227198873160314461
 GameObject:
   m_ObjectHideFlags: 0
@@ -158,7 +158,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 75381ab10ee8a0249b8b58d075c7a469, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

@@ -1,24 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class InventoryManager : MonoBehaviour
 {
     public static InventoryManager Instance;
     [SerializeField] private List<ItemData> itemList;
+    private List<ItemData> items = new List<ItemData>();
     [SerializeField] private Animator animtor_backPack;
     [SerializeField] private Animator animtor_player;
 
     private ItemIconManager iconManager;
-
     private readonly int hash_level = Animator.StringToHash("Level");
-
     private int level = 0;
 
     private void Awake()
     {
-        Instance = this;
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+
         iconManager = GetComponent<ItemIconManager>();
     }
 
@@ -29,23 +36,27 @@ public class InventoryManager : MonoBehaviour
 
     private void SetBackPackAnimator()
     {
-        if(itemList.Count > 2 && itemList.Count <= 4 && level != 2)
+        int newLevel = 0;
+
+        if (items.Count > 0 && items.Count <= 2)
         {
-            animtor_player.Rebind();
-            level = 2;
+            newLevel = 2;
         }
-        else if(itemList.Count > 4 && itemList.Count <= 6 && level != 3)
+        else if (items.Count > 2 && items.Count <= 4)
         {
-            animtor_player.Rebind();
-            level = 3;
+            newLevel = 3;
         }
-        else if(itemList.Count > 6 && level != 4)
+        else if (items.Count > 4)
         {
-            animtor_player.Rebind();
-            level = 4;
+            newLevel = 4;
         }
 
-        animtor_backPack.SetInteger(hash_level, level);
+        if (newLevel != level)
+        {
+            level = newLevel;
+            animtor_player.Rebind();
+            animtor_backPack.SetInteger(hash_level, level);
+        }
     }
 
     public ItemData GetRandomItem()
@@ -55,9 +66,18 @@ public class InventoryManager : MonoBehaviour
 
     public void SkillActing(int skillIndex)
     {
-        GameObject item = Instantiate(itemList[skillIndex].ItemPrefab);
+        if (skillIndex < 0 || skillIndex >= items.Count)
+        {
+            Debug.LogWarning("잘못된 인덱스입니다.");
+            return;
+        }
+
+        // 아이템 소환
+        GameObject item = Instantiate(items[skillIndex].ItemPrefab);
         item.transform.position = GameManager.Instance.Player.transform.position;
-        itemList.RemoveAt(skillIndex);
+        item.GetComponent<Item>().SetColorType((ColorType)iconManager.GetItemListIndexColorType(skillIndex));
+
+        items.RemoveAt(skillIndex);
 
         iconManager.RemoveSkill(skillIndex);
         iconManager.SortingItems();
@@ -65,10 +85,13 @@ public class InventoryManager : MonoBehaviour
 
     public void AddItem(ItemData addItem, int randomColorIndex)
     {
-        if (itemList.Count > 9) return;
+        if (itemList.Count >= 10) // 최대 크기를 10으로 설정
+        {
+            Debug.LogWarning("아이템을 더 이상 추가할 수 없습니다.");
+            return;
+        }
 
-        itemList.Add(addItem);
-
+        items.Add(addItem);
         iconManager.AddItemIcon(addItem, randomColorIndex);
         iconManager.SortingItems();
     }

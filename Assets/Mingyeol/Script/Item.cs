@@ -13,4 +13,15 @@ public abstract class Item : MonoBehaviour
     {
         colorType = type;
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.CompareTag("Monster"))
+        {
+            if (collision.gameObject.GetComponent<Monster>()._ColorType == colorType)
+            {
+
+            }
+        }
+    }
 }
