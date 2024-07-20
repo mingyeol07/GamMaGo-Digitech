@@ -4,10 +4,17 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Instance; 
+    public static GameManager Instance;
+
+    [SerializeField] private GameObject pnl_gameOver;
+    [SerializeField] private GameObject pnl_clear;
 
     [SerializeField] private GameObject player;
     public GameObject Player => player;
+
+    [SerializeField] private Transform itemParent;
+    public Transform ItemParent => itemParent;
+
     [SerializeField] private GameObject testPickUpitem;
 
     private void Awake()
@@ -15,11 +22,13 @@ public class GameManager : MonoBehaviour
         Instance = this;
     }
 
+    public void GameOver()
+    {
+      pnl_gameOver.SetActive(true);
+    }
+
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            Instantiate(testPickUpitem, new Vector3(0,0,0), Quaternion.identity);
-        }
+
     }
 }

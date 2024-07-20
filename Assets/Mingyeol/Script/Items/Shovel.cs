@@ -11,5 +11,6 @@ public class Shovel : Item
 
     public override void ActSkill()
     {
+        GameManager.Instance.Player.GetComponent<Player>().BoldSlash();
     }
 }
