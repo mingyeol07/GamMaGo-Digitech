@@ -8,4 +8,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/InGyu/Title.unity
+    guid: f06af9dbe1b0e01498cfe8ce49e42c27
+  - enabled: 1
+    path: Assets/InGyu/INGYUSCENE.unity
+    guid: 0def59abeda7006418f9c0a90e921f06
   m_configObjects: {}
