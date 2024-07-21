@@ -17,6 +17,8 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private GameObject testPickUpitem;
 
+    public Animator playerAnim;
+
     private void Awake()
     {
         Instance = this;

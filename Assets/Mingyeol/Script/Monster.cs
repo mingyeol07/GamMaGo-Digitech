@@ -91,9 +91,7 @@ public class Monster : MonoBehaviour
             {
                 transform.rotation = Quaternion.Euler(0, 180, 0);
             }
-
         }
-
     }
 
     protected virtual void Attack()
@@ -104,8 +102,13 @@ public class Monster : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            ItemDrop();
+        }
+
         if (collision.gameObject.CompareTag("PlayerAttack"))
         {
             HpDown();
@@ -115,15 +118,37 @@ public class Monster : MonoBehaviour
     private void HpDown()
     {
         curHp--;
-
-        Debug.Log("DD");
-
-        rigid.velocity = Vector2.left * 3;
+        StartCoroutine(Hit());
 
         if (curHp <= 0)
         {
             Destroy(gameObject);
         }
+        ItemDrop();
+    }
+
+    private IEnumerator Hit()
+    {
+        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+        Color originalColor = spriteRenderer.color;
+
+        // 몬스터를 붉은색으로 변환
+        spriteRenderer.color = Color.red;
+
+        // 일정 시간 동안 붉은색 유지
+        yield return new WaitForSeconds(0.5f);
+
+        // 원래 색상으로 천천히 되돌리기
+        float elapsedTime = 0f;
+        float duration = 1f;
+        while (elapsedTime < duration)
+        {
+            spriteRenderer.color = Color.Lerp(Color.red, originalColor, elapsedTime / duration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        spriteRenderer.color = originalColor;
     }
 
     public void ItemDrop()

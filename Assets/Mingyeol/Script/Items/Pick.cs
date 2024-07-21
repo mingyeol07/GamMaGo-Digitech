@@ -12,5 +12,6 @@ public class Pick : Item
     public override void ActSkill()
     {
         GameManager.Instance.Player.GetComponent<Player>().SharpSlash();
+        GameManager.Instance.playerAnim.SetTrigger("Pick");
     }
 }

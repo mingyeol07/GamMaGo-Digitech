@@ -38,7 +38,9 @@ public class InventoryManager : MonoBehaviour
 
     public GameObject GetRandomItemSpawn()
     {
-        return Instantiate(pickUpItemPrefab);
+        GameObject go = Instantiate(pickUpItemPrefab);
+        go.transform.position = GameManager.Instance.Player.transform.position;
+        return go;
     }
 
     private void SetBackPackAnimator()
