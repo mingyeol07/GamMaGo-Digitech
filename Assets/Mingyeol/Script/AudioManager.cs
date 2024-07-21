@@ -4,10 +4,7 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-    [SerializeField] private AudioClip audioSource;
-    [SerializeField] private AudioClip itemPickUp;
-    [SerializeField] private AudioClip itemAction;
-    [SerializeField] private AudioClip jumpSound;
+    [SerializeField] private AudioClip[] swing1;
 
     [SerializeField] private AudioSource source;
 
@@ -17,8 +14,10 @@ public class AudioManager : MonoBehaviour
     {
         instance = this;
     }
-    public void SetOptions(AudioSource audioSource)
+    public void SetSounds(int sourceIndex)
     {
+        source.clip = swing1[sourceIndex];
+
         source.Play();
     }
 

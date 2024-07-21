@@ -94,7 +94,7 @@ public class InventoryManager : MonoBehaviour
 
     public void AddItem(ItemData addItem, int randomColorIndex)
     {
-        if (itemList.Count >= 10) // 최대 크기를 10으로 설정
+        if (itemList.Count >= 6) // 최대 크기를 10으로 설정
         {
             GameManager.Instance.GameOver();
             return;

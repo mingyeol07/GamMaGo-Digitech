@@ -26,7 +26,17 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
-      pnl_gameOver.SetActive(true);
+        Player.GetComponent<Player>().enabled = false;
+
+        playerAnim.SetTrigger("Dead");
+
+        StartCoroutine(Dedr());
+    }
+
+    IEnumerator Dedr()
+    {
+        yield return new WaitForSeconds(3f);
+        pnl_gameOver.SetActive(true);
     }
 
     void Update()

@@ -11,6 +11,7 @@ public class Pick : Item
 
     public override void ActSkill()
     {
+        AudioManager.instance.SetSounds(1);
         GameManager.Instance.Player.GetComponent<Player>().SharpSlash();
         GameManager.Instance.playerAnim.SetTrigger("Pick");
     }

@@ -101,6 +101,13 @@ public class Monster : MonoBehaviour
             // 공격 로직 구현
         }
     }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("PlayerAttack"))
+        {
+            HpDown();
+        }
+    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -109,10 +116,7 @@ public class Monster : MonoBehaviour
             ItemDrop();
         }
 
-        if (collision.gameObject.CompareTag("PlayerAttack"))
-        {
-            HpDown();
-        }
+
     }
 
     private void HpDown()
@@ -124,7 +128,6 @@ public class Monster : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        ItemDrop();
     }
 
     private IEnumerator Hit()

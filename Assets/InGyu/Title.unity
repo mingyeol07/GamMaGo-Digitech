@@ -2154,6 +2154,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1432294481}
   - component: {fileID: 1432294482}
+  - component: {fileID: 1432294483}
   m_Layer: 0
   m_Name: Audio manager
   m_TagString: Untagged
@@ -2204,6 +2205,20 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 2ef6d606eb20fa741985cde39f66d40e, type: 3}
   musicSource: {fileID: 836130184}
   sfxSource: {fileID: 1928463013}
+--- !u!114 &1432294483
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1432294480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccb7bfd5f396b124ebb2621ce4e06bc6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  start: {fileID: 450900459}
+  QUit: {fileID: 742169396}
 --- !u!1 &1433403555
 GameObject:
   m_ObjectHideFlags: 0

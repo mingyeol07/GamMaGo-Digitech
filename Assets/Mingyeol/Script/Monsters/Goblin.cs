@@ -24,7 +24,7 @@ public class Goblin : Monster
 
         // 플레이어에게 돌진
 
-        rigid.velocity = new Vector2(direction.x * 10, direction.y * 10);
+        rigid.velocity = new Vector2(direction.x * 10, rigid.velocity.y);
 
         // 공격 지속 시간
         yield return new WaitForSeconds(2.5f);
